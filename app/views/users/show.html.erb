@@ -1,27 +1,23 @@
 <p>
   Name:
-  <%= @user.first_name + ' ' + @user.last_name %>
+  <%= full_name(@user) %>
 </p>
 
 <p>
   Email:
-  <% if @user.private_email %>
-    Private
-  <% else %>
-    <%= @user.email %>
-  <% end %>
+  <%= @user_decorator.shown_email %>
 </p>
 
 <p>
   Birthday:
-  <%= @user.birthday.strftime('%d - %m - %Y') %>
+  <%= @user_decorator.shown_birthday %>
 </p>
 
 <p>
   Followers:
   <ul>
-    <% @user.followers.each do |follower| %>
-      <li><%= link_to follower.first_name + ' ' + follower.last_name, follower %></li>
+    <% @user_decorator.followers.each do |follower| %>
+      <li><%= link_to full_name(follower), follower %></li>
     <% end %>
   </ul>
 </p>
@@ -29,8 +25,8 @@
 <p>
   Following:
   <ul>
-    <% @user.following.each do |followed| %>
-      <li><%= link_to followed.first_name + ' ' + followed.last_name, followed %></li>
+    <% @user_decorator.following.each do |followed| %>
+      <li><%= link_to full_name(followed), followed %></li>
     <% end %>
   </ul>
 </p>
@@ -38,7 +34,7 @@
 <p>
   Posts
   <dl>
-    <% @user.posts.each do |post| %>
+    <% @user_decorator.posts.each do |post| %>
       <dt>Description:</dt>
       <dd><%= post.description %></dd>
       <dt>Likes:</dt>
